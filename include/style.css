@@ -107,6 +107,10 @@ body {
   -webkit-transition: opacity .5s;
   transition: opacity .5s;
 }
+.options {
+  color: #fff;
+  margin: 80px 20px 0;
+}
 /*.noOp{*/
 /*opacity: 0 !important;*/
 /*}*/

@@ -6,7 +6,7 @@
     <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0;">
     <title>万圣节</title>
     <link rel="stylesheet" href="include/style.css">
-
+    <link rel="stylesheet" href="include/nouislider.min.css">
 </head>
 <body>
 
@@ -20,6 +20,10 @@
 
     <div class="view1">
         <img src="include/refresh.png" id="refresh" class="refresh">
+        <div class="options">
+            <div class="range" id="range"></div>
+            <div id="range-text">笔粗：10</div>
+        </div>
         <div class="box" id="bb">
             <canvas id="cas" ></canvas>
         </div>
@@ -36,6 +40,7 @@
 
 </div>
 <script src="include/jquery.min.js"></script>
+<script src="include/nouislider.min.js"></script>
 <script src="include/hallowmas.js"></script>
 
 </body>

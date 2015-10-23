@@ -18,11 +18,33 @@ $(function(){
         $('#container').removeClass('p3').addClass('p2');
         startGame();
     })
+
+
 });
+
+
 var canvas = document.getElementById("cas"), ctx = canvas.getContext("2d");
-var x1, y1, a = 10, timeout, totimes = 100, distance = 30;
+var x1, y1, a = 1, timeout, totimes = 100, distance = 30;
 var saveDot = [];
 canvas.width = document.body.offsetWidth*.9;
+
+var rangeSlider = $('#range')[0];
+
+noUiSlider.create(rangeSlider, {
+    start: [ 10 ],
+    step:1,
+    range: {
+        'min': [  1 ],
+        'max': [ 20 ]
+    }
+});
+rangeSlider.noUiSlider.on('update', function( values, handle ) {
+    console.log(values[handle]);
+    $('#range-text').html('笔粗：'+values[handle]);
+    x1=y1=a=values[handle];
+    tapClip();
+});
+
 
 function startGame(){
     var img = new Image();
@@ -47,7 +69,6 @@ function getClipArea(e, hastouch){
         y -= ndom.offsetTop;
         ndom = ndom.parentNode;
     }
-
     return {
         x: x,
         y: y
@@ -93,8 +114,9 @@ function tapClip() {
     ctx.lineJoin = "round";
     ctx.lineWidth = a * 2;
     ctx.globalCompositeOperation = "destination-out";
-
-    window.addEventListener(tapstart, function (e) {
+    window.removeEventListener(tapstart,tStart);
+    window.addEventListener(tapstart, tStart)
+    function tStart(e){
         clearTimeout(timeout);
         e.preventDefault();
         area = getClipArea(e, hastouch);
@@ -115,6 +137,7 @@ function tapClip() {
                 for (var x = 0; x < imgData.width; x += distance) {
                     for (var y = 0; y < imgData.height; y += distance) {
                         var i = (y * imgData.width + x) * 4;
+
                         if (imgData.data[i + 3] > 0) { dd++ }
                     }
                 }
@@ -139,27 +162,11 @@ function tapClip() {
             x1 = x2;
             y1 = y2;
         }
-    })
+    }
+
 }
 
 function drawLine(x1, y1, x2, y2){
-//		ctx.save();
-//		if(arguments.length==2){
-//			saveDot = [[x1, y1]];
-//			ctx.beginPath();
-//			ctx.arc(x1, y1, a, 0, 2 * Math.PI);
-//			ctx.fill();
-//		}else {
-//			saveDot.push([x2,y2]);
-//			if(saveDot.length >= 3){
-//				ctx.beginPath();
-//				ctx.moveTo(saveDot[0][0], saveDot[0][1]);
-//				ctx.quadraticCurveTo(saveDot[1][0], saveDot[1][1], saveDot[2][0], saveDot[2][1]);
-//				ctx.stroke();
-//				saveDot = [saveDot.pop()];
-//			}
-//		}
-//		ctx.restore();
     ctx.save();
     ctx.beginPath();
     if(arguments.length==2){
@@ -168,6 +175,7 @@ function drawLine(x1, y1, x2, y2){
     }else {
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
+        ctx.strokeStyle="green";
         ctx.stroke();
     }
     ctx.restore();

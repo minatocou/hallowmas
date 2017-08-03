@@ -1,0 +1,87 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0;">
+    <meta name="full-screen" content="yes"/>
+    <meta name="browsermode" content="application"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <meta name="x5-page-mode" content="app"/>
+
+    <title>恐怖万圣节 刻南瓜来辟邪！</title>
+    <link rel="stylesheet" href="include/style.less">
+    <link rel="stylesheet" href="include/nouislider.min.css">
+</head>
+<body {if $Image} class="auto-scroll" {/if}>
+
+<div id="container" class="container {if $Image}p3{else}p1{/if}">
+    <div class="view-index">
+        <img src="include/index-a.png" class="index-a">
+        <div align="center" class="index-down flash"></div>
+    </div>
+    <div class="view">
+        <div class="view-text">
+            万圣节又到了，为了不让鬼魅近身，歪果仁便想出雕南瓜灯来吓走魔鬼。起源据说是位叫Jack的男子戏弄魔鬼，结果死后进不了天堂，入不了地狱，只能将灵魂拘于南瓜中，所以南瓜灯也叫Jack-o'-lantern哦！想不想自己雕个南瓜灯呢
+        </div>
+        <img src="include/index-bottom.png" class="index-bottom">
+        <img src="include/start-btn.png" id="start-btn" class="start-btn">
+    </div>
+
+    <div class="view1">
+        <img src="include/refresh.png" id="refresh" class="refresh">
+        <div class="options">
+            <div class="range" id="range"></div>
+            <div id="range-text">笔粗：10</div>
+        </div>
+        <div class="box" id="bb">
+            <canvas id="cas" ></canvas>
+        </div>
+        <img src="include/save-btn.png" id="save-btn" class="save-btn">
+    </div>
+    <div align="center" class="view2">
+        <p class="vtext">
+            {$Text}
+        </p>
+        <img src="{$Image}" class="viewImg" id="viewImg">
+        <p class="view2-text">
+            2015年10月31前，将你的恐怖大作分享到朋友圈，并截图至路路行微信，附上你的email，我们将从中抽取五名幸运儿，赠送波士顿旅游局提供的<span class="y">精美礼品</span>喔！
+        </p>
+        {if $Image}
+            <img src="include/i-do-btn.png" id="iDO" class="btn-group big">
+        {/if}
+        <div class="endPage-btn {if $Image} hide {/if}">
+            <img src="include/reset-btn.png" id="reset-btn" class="btn-group"><img id="share-btn" src="include/share-btn.png" class="btn-group">
+
+        </div>
+        <div class="view2-qcode" align="center">
+            <p class="y">长按二维码进入路路行官方微信</p>
+            <img src="include/qcode.jpg" class="qcode">
+            <img src="include/tripAdvisor.png" class="tripAdvisor">
+        </div>
+    </div>
+</div>
+<div class="plane">
+    <img src="include/fx.png" class="plane-img">
+</div>
+<script src="include/jquery.min.js"></script>
+<script src="include/nouislider.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    var lulu='{$luluimg}';
+    var pumpkinImg='/images/app/promo/halloween/include/pumpkin.png';
+</script>
+
+<script src="include/halloween.js"></script>
+{if $Image}
+<script>
+    wxShareConf.title='{$Text}';
+    wxShareConf.desc='{$Text}';
+    wxShareConf.link=location.href;
+    wxShareConf.imgUrl='{$Image}';
+    fx();
+</script>
+{/if}
+</body>
+</html>
